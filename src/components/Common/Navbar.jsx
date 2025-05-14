@@ -52,7 +52,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-5">
             {user ? (
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">{user.username}</span>
+                <span className="text-sm text-gray-600">{user.displayName}</span>
                 <button
                   onClick={logout}
                   className="text-sm text-blue-600 hover:underline"
