@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import registerImg from "../assets/register.webp";
+import registerImg from "../assets/register.jpg";
 import { useAuth } from "../components/Cart/AuthContext";
 import { toast } from "sonner";
 const Register = () => {
@@ -89,7 +89,7 @@ const Register = () => {
           <img
             src={registerImg}
             alt=""
-            className=" h-[450px] w-full object-cover mr-3 -mt-32 rounded-md"
+            className=" h-[550px] w-full object-cover mr-3 -mt-8 rounded-md"
           />
         </div>
       </div>

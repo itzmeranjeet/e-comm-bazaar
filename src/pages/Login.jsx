@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import login from "../assets/login.webp";
+import loginImg from "../assets/login.jpg"
 import { useAuth } from "../components/Cart/AuthContext";
 import { toast } from "sonner";
 const Login = () => {
@@ -81,7 +81,7 @@ const Login = () => {
       <div className=" hidden md:block w-6/12 ">
         <div className="h-full flex flex-col justify-center items-center ">
           <img
-            src={login}
+            src={loginImg}
             alt=""
             className=" h-[450px] w-full object-cover mr-3  -mt-10 rounded-md"
           />
