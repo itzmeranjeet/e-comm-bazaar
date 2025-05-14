@@ -288,7 +288,7 @@ const ProductDetails = () => {
           </h2>
           {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 space-y-0 items-center">
-              {similarProducts.slice(0, 3).map((product) => (
+              {similarProducts.slice(2, 5).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
