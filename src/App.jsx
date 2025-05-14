@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from "./components/Layout/UserLayout";
@@ -13,7 +10,6 @@ import AllCollection from "./pages/AllCollection";
 import ProductDetails from "./components/Products/ProductDetails";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -25,8 +21,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="profile " element={<Profile />} />
-            <Route path="/collections/:category" element={<AllCollection />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="collections/:category" element={<AllCollection />} />
+            <Route path="product/:id" element={<ProductDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>
