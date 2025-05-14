@@ -1,4 +1,3 @@
-// import { useCart } from "../context/CartContext";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { useCart } from "./CartContext";
 
@@ -9,12 +8,12 @@ const CartPage = () => {
     <div className="p-6 max-w-3xl mx-auto">
       <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
       {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p>Cart is empty</p>
       ) : (
         <>
-          {cart.map((item, idx) => (
+          {cart.map((item, index) => (
             <div
-              key={idx}
+              key={index}
               className="flex justify-between items-center border-b py-4"
             >
               <div className="flex gap-4">

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import login from "../assets/login.webp";
 import { useAuth } from "../components/Cart/AuthContext";
+import { toast } from "sonner";
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,8 +15,10 @@ const Login = () => {
 
     try {
       await login(form.email, form.password);
-      navigate("/"); // Redirect to home after login
+      toast.success("Login successful");
+      navigate("/");
     } catch (err) {
+      toast.error("Login failed");
       setError("Invalid email or password.");
       console.error(err.message);
     }
@@ -44,7 +46,7 @@ const Login = () => {
               type="text"
               className=" border rounded p-2 w-full"
               placeholder="Enter your email"
-               value={form.email}
+              value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
           </div>

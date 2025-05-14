@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../assets/register.webp";
 import { useAuth } from "../components/Cart/AuthContext";
+import { toast } from "sonner";
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
 
@@ -12,8 +13,10 @@ const Register = () => {
     e.preventDefault();
     try {
       await register(form.email, form.password, form.name);
+      toast.success("Registration successful");
       navigate("/");
     } catch (error) {
+      toast.error("Registration failed");
       alert(error.message);
     }
   };

@@ -1,6 +1,5 @@
-// src/context/AuthContext.jsx
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../../firebase/firebase"; 
+import { auth } from "../../firebase/firebase";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -12,26 +11,27 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // prevents flickering
+  const [loading, setLoading] = useState(true); 
 
-  // ✅ Persist user on refresh/login/logout
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const userAuthState = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
     });
 
-    return () => unsubscribe(); // cleanup listener
+    return () => userAuthState(); 
   }, []);
 
-  // 🔐 Auth Functions
-  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-  const register = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+
+  const login = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
+  const register = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
   const logout = () => signOut(auth);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -67,7 +67,7 @@ const ProductDetails = () => {
   }, [id]);
 
   if (!product) {
-    return <div className="p-8 text-center">Loading product...</div>;
+    return <div className="p-8 text-center">Products Loading</div>;
   }
 
   const colors = ["Red", "Blue", "Black"];
@@ -77,7 +77,7 @@ const ProductDetails = () => {
     <div className="p-6">
       <div className="max-w-5xl mx-auto bg-white p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
-          {/* Thumbnails (desktop only) */}
+          {/* thumbnalis desktop */}
           <div className="hidden md:flex flex-col space-y-4 mr-6">
             {product.images?.map((img, idx) => (
               <img
@@ -92,7 +92,7 @@ const ProductDetails = () => {
             ))}
           </div>
 
-          {/* Main image */}
+          {/* mian image */}
           <div className="md:w-1/2">
             <div className="mb-4">
               {mainImage && (
@@ -104,7 +104,7 @@ const ProductDetails = () => {
               )}
             </div>
 
-            {/* Thumbnails (mobile) */}
+            {/* thumbnails mobile */}
             <div className="md:hidden flex overflow-x-scroll space-x-4 mb-4">
               {product.images?.map((img, idx) => (
                 <img
@@ -120,7 +120,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          {/* Right side*/}
+          {/* for right side*/}
           <div className="md:w-1/2 md:ml-10">
             <h1 className="text-2xl md:text-3xl font-semibold mb-2">
               {product.title}
@@ -128,7 +128,7 @@ const ProductDetails = () => {
             <p className="text-xl text-gray-500 mb-2">${product.price}</p>
             <p className="text-gray-600 mb-4">{product.description}</p>
 
-            {/* stock and ratimg */}
+            {/* stock  */}
             <div className="mb-4 space-y-1 text-sm">
               <p>
                 <strong>Stock:</strong>{" "}
@@ -204,7 +204,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Add to Cart */}
+            {/* add to Cart */}
             <button
               disabled={isButtonDisabled}
               onClick={handleAddToCart}
@@ -217,7 +217,7 @@ const ProductDetails = () => {
               {isButtonDisabled ? "Adding..." : "Add to Cart"}
             </button>
 
-            {/* Characteristics */}
+            {/* characteristics */}
             <div className="mt-10 text-gray-700">
               <h3 className="text-xl font-bold mb-4">Characteristics:</h3>
               <table className="w-full text-left text-sm">
@@ -263,7 +263,7 @@ const ProductDetails = () => {
           )}
         </div>
 
-        {/* Similar Products Section */}
+        {/* similar products section */}
         <div className="mt-20">
           <h2 className="text-2xl font-medium text-center mb-4">
             You May Also Like

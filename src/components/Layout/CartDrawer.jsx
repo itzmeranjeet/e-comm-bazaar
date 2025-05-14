@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import CartContext from "../Cart/CartPage";
+import CartPage from "../Cart/CartPage";
 
 const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
   return (
@@ -18,7 +18,8 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
         {/* cart content */}
         <div className=" flex-grow p-4 overflow-y-auto">
           <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
-          <CartContext />
+          {/* <CartContext /> */}
+          <CartPage />
         </div>
         <div className=" p-4 bg-white sticky bottom-0">
           <button className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition ">

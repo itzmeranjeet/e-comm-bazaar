@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const NewArrivals = () => {
+const Gallery = () => {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -130,4 +130,4 @@ const NewArrivals = () => {
   );
 };
 
-export default NewArrivals;
+export default Gallery;
