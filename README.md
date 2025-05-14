@@ -1,12 +1,49 @@
-# React + Vite
+#E-comm Bazaar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce product detail page built with React, featuring user authentication using Firebase and a dynamic cart system sync with Firestore.
 
-Currently, two official plugins are available:
+##Project Description
+-Browse products
+-View product details
+-Register/login using Firebase Authentication
+-Add items to cart (only for logged-in users)
+-Automatically save and retrieve cart items using Firestore
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It is designed to practice frontend development skills with a focus on authentication, state management, and real-time data persistence.
 
-## Expanding the ESLint configuration
+##Setup Instructions
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#1. Clone the repo
+-bash
+git clone https://github.com/your-username/ecomm-bazaar.git
+cd ecomm-bazaar
+
+#2. Install dependencies
+npm install
+
+#3. Setup Firebase
+-Create a Firebase project at https://console.firebase.google.com
+-Enable Email/Password sign-in method
+-Enable Firestore Database
+-Get your Firebase config object and create a file:
+--src/firebase/firebase.js
+
+#4Start the development server
+-npm run dev
+
+#Features Implements
+-Responsive design with TailwindCSS
+-Search bar
+=Modular components (ProductCard, CartDrawer, Navbar, etc.)
+-Firebase authentication (Register, Login, Logout)
+-Protected cart functionality (only for logged-in users)
+-Cart state using useReducer + Context API
+-Cart sync to Firestore (persisted across logins)
+
+#Technologies Used
+-React
+-TailwindCSS
+-Sonner(for toast popup)
+-React Router DOM
+-Firebase (Auth + Firestore)
+-Context API + useReducer
