@@ -15,7 +15,6 @@ const initialState = [];
 
 const cartReducer = (state, action) => {
   if (action.type === "SET_CART") {
-    console.log("SET_CART", action.payload);
     return action.payload;
   } else if (action.type === "ADD_TO_CART") {
     const existingItem = state.find(
@@ -25,20 +24,9 @@ const cartReducer = (state, action) => {
         item.color === action.payload.color
     );
 
-    console.log("EXISTING ITEM", existingItem);
+    // console.log("EXISTING ITEM", existingItem);
 
     if (existingItem) {
-      console.log(
-        "IF EXISTING ITEM",
-        state.map((item) =>
-          item.productId === existingItem.productId &&
-          item.size === existingItem.size &&
-          item.color === existingItem.color
-            ? { ...item, quantity: item.quantity + action.payload.quantity }
-            : item
-        )
-      );
-
       return state.map((item) =>
         item.productId === existingItem.productId &&
         item.size === existingItem.size &&
@@ -48,13 +36,12 @@ const cartReducer = (state, action) => {
       );
     }
 
-    console.log("ELSE STATE", [...state, action.payload]);
     return [...state, action.payload];
   } else if (action.type === "REMOVE_FROM_CART") {
     const updatedCart = state.filter(
       (item) => item.productId !== action.payload
     );
-    console.log("REMOVE_FROM_CART", updatedCart);
+    // console.log("REMOVE_FROM_CART", updatedCart);
     return updatedCart;
   } else if (action.type === "UPDATE_QUANTITY") {
     const updatedQuantity = state.map((item) =>
@@ -64,10 +51,10 @@ const cartReducer = (state, action) => {
         ? { ...item, quantity: action.payload.quantity }
         : item
     );
-    console.log("UPDATE_QUANTITY", updatedQuantity);
+    // console.log("UPDATE_QUANTITY", updatedQuantity);
     return updatedQuantity;
   } else {
-    console.log("DEFAULT STATE", state);
+    // console.log("DEFAULT STATE", state);
     return state;
   }
 };
@@ -76,7 +63,7 @@ export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   console.log("user", user);
   const [cart, dispatch] = useReducer(cartReducer, initialState);
-  console.log({ cart: cart, dispatch: dispatch });
+  // console.log({ cart: cart, dispatch: dispatch });
   const [isCartLoaded, setIsCartLoaded] = useState(false);
 
   // cart load from firestore
