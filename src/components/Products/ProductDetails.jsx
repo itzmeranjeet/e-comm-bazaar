@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import ProductGrid from "./ProductGrid";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "../Cart/CartContext";
 import { useAuth } from "../Cart/AuthContext";
-
+import ProductCard from "./ProductCard";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -15,11 +14,10 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [similarProducts, setSimilarProducts] = useState([]);
 
   const { addToCart } = useCart();
   const { user } = useAuth();
-
-  
 
   useEffect(() => {
     if (product?.thumbnail) {
@@ -32,12 +30,12 @@ const ProductDetails = () => {
       toast.error("Please log in to add items to your cart");
       return;
     }
-    
+
     if (!selectedSize || !selectedColor) {
       toast.error("Please select size and color", { duration: 1000 });
       return;
     }
-  
+
     const item = {
       productId: product.id,
       name: product.title,
@@ -47,24 +45,44 @@ const ProductDetails = () => {
       price: product.price,
       image: product.thumbnail,
     };
-  
+
     addToCart(item);
     toast.success("Added to cart");
   };
-  
 
   const getProduct = async () => {
     try {
       const response = await axios.get(`https://dummyjson.com/products/${id}`);
+      console.log("response", response.data);
+
       setProduct(response.data);
     } catch (error) {
       console.error("Error fetching product:", error);
     }
   };
 
+  const getSimilarProducts = async () => {
+    try {
+      const response = await axios.get(
+        `https://dummyjson.com/products/category/${product.category}`
+      );
+      console.log("response product", response.data.products);
+      setSimilarProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching similar products:", error);
+    }
+  };
+
   useEffect(() => {
     getProduct();
+ 
   }, [id]);
+
+  useEffect(() => {
+    if (product) {
+      getSimilarProducts();
+    }
+  }, [product]);
 
   if (!product) {
     return <div className="p-8 text-center">Products Loading</div>;
@@ -218,7 +236,7 @@ const ProductDetails = () => {
             </button>
 
             {/* characteristics */}
-            <div className="mt-10 text-gray-700">
+            {/* <div className="mt-10 text-gray-700">
               <h3 className="text-xl font-bold mb-4">Characteristics:</h3>
               <table className="w-full text-left text-sm">
                 <tbody>
@@ -232,7 +250,7 @@ const ProductDetails = () => {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* rating and review */}
@@ -268,7 +286,13 @@ const ProductDetails = () => {
           <h2 className="text-2xl font-medium text-center mb-4">
             You May Also Like
           </h2>
-          
+          {
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 space-y-0 items-center">
+              {similarProducts.slice(0, 3).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          }
         </div>
       </div>
     </div>

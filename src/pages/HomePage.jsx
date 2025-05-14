@@ -3,7 +3,7 @@ import Hero from "../components/Layout/Hero";
 import GenderCollection from "../components/Products/GenderCollection";
 import NewArrivals from "../components/Products/Gallery";
 import ProductDetails from "../components/Products/ProductDetails";
-import ProductGrid from "../components/Products/ProductGrid";
+// import ProductGrid from "../components/Products/ProductGrid";
 
 // const placeholderProducts = [
 //   {
