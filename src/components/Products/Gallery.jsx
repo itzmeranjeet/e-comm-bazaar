@@ -60,7 +60,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section className="py-16 px-4 lg:px-0 bg-gray-50">
+    <section className="py-16 px-4 lg:px-0 bg-gray-100">
       <div className="container mx-auto text-center mb-12">
         <h2 className="text-3xl font-semibold text-gray-800 mb-4">
           Explore New Arrivals
@@ -114,13 +114,16 @@ const Gallery = () => {
                 <p className="text-gray-600 mt-1">${product.price}</p>
               </div>
 
-              <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl">
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center px-4 rounded-xl space-y-4">
                 <Link
                   to={`/product/${product.id}`}
                   className="bg-white text-black px-4 py-2 rounded-lg shadow font-semibold hover:bg-gray-200 transition"
                 >
                   View Product
                 </Link>
+                <p className="text-white text-sm line-clamp-3">
+                  {product.description}
+                </p>
               </div>
             </div>
           ))}
