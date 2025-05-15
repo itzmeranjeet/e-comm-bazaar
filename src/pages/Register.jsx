@@ -3,14 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../assets/register.jpg";
 import { useAuth } from "../components/Cart/AuthContext";
 import { toast } from "sonner";
+import { ClipLoader } from "react-spinners";
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await register(form.email, form.password, form.name);
       toast.success("Registration successful");
@@ -18,6 +21,8 @@ const Register = () => {
     } catch (error) {
       toast.error("Registration failed");
       alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -73,7 +78,7 @@ const Register = () => {
             type="submit"
             className=" w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition "
           >
-            Sign Up
+            {loading ? <ClipLoader size={20} color="#ffffff" /> : "Register"}
           </button>
           <p className=" mt-5 text-center text-sm">
             Already have an account?

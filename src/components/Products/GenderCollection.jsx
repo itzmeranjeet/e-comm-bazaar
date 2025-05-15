@@ -28,7 +28,7 @@ const GenderCollection = () => {
         {/* men */}
         <div className="relative flex-1 group overflow-hidden rounded-xl shadow-md">
           <img
-            loading="lazy"
+        
             src={mensCollImage}
             alt="Men's Collection"
             className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"

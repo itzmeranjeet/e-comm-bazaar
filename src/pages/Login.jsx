@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginImg from "../assets/login.jpg"
+import loginImg from "../assets/login.jpg";
 import { useAuth } from "../components/Cart/AuthContext";
 import { toast } from "sonner";
+import { ClipLoader } from "react-spinners";
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+    setLoading(true);
     try {
       await login(form.email, form.password);
       toast.success("Login successful");
@@ -21,6 +23,8 @@ const Login = () => {
       toast.error("Login failed");
       setError("Invalid email or password.");
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -66,7 +70,7 @@ const Login = () => {
             type="submit"
             className=" w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition "
           >
-            Sign In
+            {loading ? <ClipLoader size={20} color="#ffffff" /> : "Sign In"}
           </button>
           <p className=" mt-5 text-center text-sm">
             {" "}

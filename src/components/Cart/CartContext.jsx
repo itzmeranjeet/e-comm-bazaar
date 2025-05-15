@@ -14,50 +14,47 @@ const CartContext = createContext();
 const initialState = [];
 
 const cartReducer = (state, action) => {
-  if (action.type === "SET_CART") {
-    return action.payload;
-  } else if (action.type === "ADD_TO_CART") {
-    const existingItem = state.find(
-      (item) =>
+  switch (action.type) {
+    case "SET_CART":
+      return action.payload;
+
+    case "ADD_TO_CART":
+      const existingItem = state.find(
+        (item) =>
+          item.productId === action.payload.productId &&
+          item.size === action.payload.size &&
+          item.color === action.payload.color
+      );
+
+      if (existingItem) {
+        return state.map((item) =>
+          item.productId === existingItem.productId &&
+          item.size === existingItem.size &&
+          item.color === existingItem.color
+            ? { ...item, quantity: item.quantity + action.payload.quantity }
+            : item
+        );
+      }
+
+      return [...state, action.payload];
+
+    case "REMOVE_FROM_CART":
+      return state.filter((item) => item.productId !== action.payload);
+
+    case "UPDATE_QUANTITY":
+      return state.map((item) =>
         item.productId === action.payload.productId &&
         item.size === action.payload.size &&
         item.color === action.payload.color
-    );
-
-    // console.log("EXISTING ITEM", existingItem);
-
-    if (existingItem) {
-      return state.map((item) =>
-        item.productId === existingItem.productId &&
-        item.size === existingItem.size &&
-        item.color === existingItem.color
-          ? { ...item, quantity: item.quantity + action.payload.quantity }
+          ? { ...item, quantity: action.payload.quantity }
           : item
       );
-    }
 
-    return [...state, action.payload];
-  } else if (action.type === "REMOVE_FROM_CART") {
-    const updatedCart = state.filter(
-      (item) => item.productId !== action.payload
-    );
-    // console.log("REMOVE_FROM_CART", updatedCart);
-    return updatedCart;
-  } else if (action.type === "UPDATE_QUANTITY") {
-    const updatedQuantity = state.map((item) =>
-      item.productId === action.payload.productId &&
-      item.size === action.payload.size &&
-      item.color === action.payload.color
-        ? { ...item, quantity: action.payload.quantity }
-        : item
-    );
-    // console.log("UPDATE_QUANTITY", updatedQuantity);
-    return updatedQuantity;
-  } else {
-    // console.log("DEFAULT STATE", state);
-    return state;
+    default:
+      return state;
   }
 };
+
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
